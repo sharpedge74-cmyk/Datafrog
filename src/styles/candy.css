@@ -1,0 +1,381 @@
+/* DataFrog Tools - Juicy Candy Match Game Design System */
+:root {
+  --candy-pink: #ff5b99;
+  --candy-pink-dark: #d8256a;
+  --candy-pink-light: #ff85b6;
+  
+  --candy-red: #ff3b4e;
+  --candy-red-dark: #c41e30;
+  
+  --candy-orange: #ff8c21;
+  --candy-orange-dark: #cc5d00;
+  --candy-orange-light: #ffa754;
+  
+  --candy-yellow: #ffd000;
+  --candy-yellow-dark: #c79e00;
+  --candy-yellow-light: #ffe566;
+  
+  --candy-green: #25d366;
+  --candy-green-dark: #128c46;
+  --candy-green-light: #5df095;
+  
+  --candy-blue: #00b4d8;
+  --candy-blue-dark: #0077b6;
+  --candy-blue-light: #53d3ec;
+  
+  --candy-purple: #9b5de5;
+  --candy-purple-dark: #6a2eb8;
+  --candy-purple-light: #b987f7;
+
+  --candy-cream: #fffaf0;
+  --candy-cream-card: #ffffff;
+  --candy-cocoa: #4a2820;
+  --candy-cocoa-light: #7a5047;
+  
+  --candy-border-white: rgba(255, 255, 255, 0.85);
+  --candy-shadow-soft: 0 10px 25px -5px rgba(110, 50, 140, 0.15), 0 8px 10px -6px rgba(110, 50, 140, 0.1);
+  --candy-shadow-card: 0 16px 36px -8px rgba(90, 30, 120, 0.18), 0 6px 16px -4px rgba(90, 30, 120, 0.12);
+  --candy-gloss: linear-gradient(180deg, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0.1) 45%, rgba(255,255,255,0) 50%);
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap');
+
+body {
+  font-family: 'Fredoka', system-ui, -apple-system, sans-serif;
+  color: var(--candy-cocoa);
+  background: radial-gradient(circle at 15% 15%, #ffe6f2 0%, #f0e6ff 40%, #e1f5fe 100%);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Floating Candy Shapes in Background */
+.candy-bg-elements {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.floating-candy {
+  position: absolute;
+  opacity: 0.28;
+  animation: floatDrift 18s ease-in-out infinite alternate;
+}
+
+@keyframes floatDrift {
+  0% { transform: translateY(0px) rotate(0deg) scale(1); }
+  50% { transform: translateY(-30px) rotate(15deg) scale(1.05); }
+  100% { transform: translateY(15px) rotate(-10deg) scale(0.98); }
+}
+
+/* Glossy 3D Candy Cards */
+.candy-card {
+  background: var(--candy-cream-card);
+  border-radius: 28px;
+  border: 4px solid #ffffff;
+  box-shadow: 0 12px 0 0 #eedcf7, 0 20px 30px rgba(110, 40, 140, 0.12);
+  position: relative;
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease;
+}
+
+.candy-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 0 0 #eedcf7, 0 24px 38px rgba(110, 40, 140, 0.18);
+}
+
+/* Signature 3D Candy Buttons */
+.candy-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-family: 'Fredoka', sans-serif;
+  font-weight: 700;
+  font-size: 1.05rem;
+  padding: 0.75rem 1.75rem;
+  border-radius: 9999px;
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.15s cubic-bezier(0.34, 1.56, 0.64, 1);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+  color: white;
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  box-sizing: border-box;
+  text-decoration: none;
+}
+
+/* Glossy highlight strip on top half */
+.candy-btn::before {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 12%;
+  right: 12%;
+  height: 40%;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.65) 0%, rgba(255, 255, 255, 0.05) 100%);
+  border-radius: 9999px 9999px 40px 40px;
+  pointer-events: none;
+}
+
+/* Button Variants */
+.candy-btn-green {
+  background: linear-gradient(180deg, var(--candy-green-light) 0%, var(--candy-green) 100%);
+  box-shadow: 0 6px 0 0 var(--candy-green-dark), 0 10px 18px rgba(18, 140, 70, 0.35);
+}
+.candy-btn-green:hover:not(:disabled) {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 8px 0 0 var(--candy-green-dark), 0 14px 22px rgba(18, 140, 70, 0.45);
+}
+.candy-btn-green:active:not(:disabled) {
+  transform: translateY(4px);
+  box-shadow: 0 2px 0 0 var(--candy-green-dark), 0 4px 10px rgba(18, 140, 70, 0.3);
+}
+
+.candy-btn-orange {
+  background: linear-gradient(180deg, var(--candy-orange-light) 0%, var(--candy-orange) 100%);
+  box-shadow: 0 6px 0 0 var(--candy-orange-dark), 0 10px 18px rgba(204, 93, 0, 0.35);
+}
+.candy-btn-orange:hover:not(:disabled) {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 8px 0 0 var(--candy-orange-dark), 0 14px 22px rgba(204, 93, 0, 0.45);
+}
+.candy-btn-orange:active:not(:disabled) {
+  transform: translateY(4px);
+  box-shadow: 0 2px 0 0 var(--candy-orange-dark), 0 4px 10px rgba(204, 93, 0, 0.3);
+}
+
+.candy-btn-blue {
+  background: linear-gradient(180deg, var(--candy-blue-light) 0%, var(--candy-blue) 100%);
+  box-shadow: 0 6px 0 0 var(--candy-blue-dark), 0 10px 18px rgba(0, 119, 182, 0.35);
+}
+.candy-btn-blue:hover:not(:disabled) {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 8px 0 0 var(--candy-blue-dark), 0 14px 22px rgba(0, 119, 182, 0.45);
+}
+.candy-btn-blue:active:not(:disabled) {
+  transform: translateY(4px);
+  box-shadow: 0 2px 0 0 var(--candy-blue-dark), 0 4px 10px rgba(0, 119, 182, 0.3);
+}
+
+.candy-btn-purple {
+  background: linear-gradient(180deg, var(--candy-purple-light) 0%, var(--candy-purple) 100%);
+  box-shadow: 0 6px 0 0 var(--candy-purple-dark), 0 10px 18px rgba(106, 46, 184, 0.35);
+}
+.candy-btn-purple:hover:not(:disabled) {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 8px 0 0 var(--candy-purple-dark), 0 14px 22px rgba(106, 46, 184, 0.45);
+}
+.candy-btn-purple:active:not(:disabled) {
+  transform: translateY(4px);
+  box-shadow: 0 2px 0 0 var(--candy-purple-dark), 0 4px 10px rgba(106, 46, 184, 0.3);
+}
+
+.candy-btn-pink {
+  background: linear-gradient(180deg, var(--candy-pink-light) 0%, var(--candy-pink) 100%);
+  box-shadow: 0 6px 0 0 var(--candy-pink-dark), 0 10px 18px rgba(216, 37, 106, 0.35);
+}
+.candy-btn-pink:hover:not(:disabled) {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 8px 0 0 var(--candy-pink-dark), 0 14px 22px rgba(216, 37, 106, 0.45);
+}
+.candy-btn-pink:active:not(:disabled) {
+  transform: translateY(4px);
+  box-shadow: 0 2px 0 0 var(--candy-pink-dark), 0 4px 10px rgba(216, 37, 106, 0.3);
+}
+
+.candy-btn-red {
+  background: linear-gradient(180deg, #ff6b7a 0%, var(--candy-red) 100%);
+  box-shadow: 0 6px 0 0 var(--candy-red-dark), 0 10px 18px rgba(196, 30, 48, 0.35);
+}
+.candy-btn-red:hover:not(:disabled) {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 8px 0 0 var(--candy-red-dark), 0 14px 22px rgba(196, 30, 48, 0.45);
+}
+.candy-btn-red:active:not(:disabled) {
+  transform: translateY(4px);
+  box-shadow: 0 2px 0 0 var(--candy-red-dark), 0 4px 10px rgba(196, 30, 48, 0.3);
+}
+
+.candy-btn:disabled {
+  opacity: 0.55;
+  filter: grayscale(0.5);
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: 0 3px 0 0 rgba(0,0,0,0.2) !important;
+}
+
+/* Category Level Tiles on Homepage */
+.candy-level-tile {
+  border-radius: 24px;
+  border: 3px solid #ffffff;
+  padding: 1.5rem 1.25rem;
+  text-align: center;
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  user-select: none;
+}
+.candy-level-tile::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 45%;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 100%);
+  border-radius: 20px 20px 40px 40px;
+  pointer-events: none;
+}
+.candy-level-tile:hover {
+  transform: translateY(-6px) scale(1.04);
+}
+
+/* Tool Badges */
+.candy-badge {
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 0.2rem 0.6rem;
+  border-radius: 9999px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: white;
+  border: 2px solid white;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+}
+
+/* Jelly wobble dropzone */
+.candy-dropzone {
+  border: 4px dashed #ff99c8;
+  border-radius: 28px;
+  background: radial-gradient(circle, #fffbfa 0%, #fff0f5 100%);
+  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+  cursor: pointer;
+}
+.candy-dropzone.drag-active {
+  border-color: var(--candy-purple);
+  background: #f8efff;
+  transform: scale(1.02);
+  box-shadow: 0 0 24px rgba(155, 93, 229, 0.35);
+  animation: jellyWobble 0.6s ease infinite alternate;
+}
+
+@keyframes jellyWobble {
+  0% { transform: scale(1.02) rotate(-0.5deg); }
+  100% { transform: scale(1.03) rotate(0.5deg); }
+}
+
+/* Liquid striped progress bar */
+.candy-progress-track {
+  height: 24px;
+  border-radius: 9999px;
+  background: #eedef5;
+  border: 3px solid #ffffff;
+  box-shadow: inset 0 2px 5px rgba(0,0,0,0.15);
+  overflow: hidden;
+  position: relative;
+}
+
+.candy-progress-fill {
+  height: 100%;
+  border-radius: 9999px;
+  background: linear-gradient(90deg, #25d366, #00b4d8);
+  background-size: 30px 30px;
+  background-image: linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.25) 25%,
+    transparent 25%,
+    transparent 50%,
+    rgba(255, 255, 255, 0.25) 50%,
+    rgba(255, 255, 255, 0.25) 75%,
+    transparent 75%,
+    transparent
+  );
+  animation: moveStripes 1s linear infinite;
+  transition: width 0.3s ease;
+}
+
+@keyframes moveStripes {
+  0% { background-position: 0 0; }
+  100% { background-position: 30px 0; }
+}
+
+/* Celebration Banner */
+.sweet-banner {
+  animation: sweetPop 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes sweetPop {
+  0% { transform: scale(0.3) rotate(-15deg); opacity: 0; }
+  50% { transform: scale(1.15) rotate(5deg); opacity: 1; }
+  75% { transform: scale(0.95) rotate(-2deg); }
+  100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+
+/* Screen Shake for Combos */
+.shake-screen {
+  animation: screenShake 0.4s ease;
+}
+
+@keyframes screenShake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-4px) rotate(-0.5deg); }
+  40%, 80% { transform: translateX(4px) rotate(0.5deg); }
+}
+
+/* Candy Range Slider */
+input[type=range].candy-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 14px;
+  border-radius: 9999px;
+  background: #eddff5;
+  border: 2px solid #ffffff;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+  outline: none;
+}
+input[type=range].candy-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #ff85b6 0%, #d8256a 100%);
+  border: 3px solid #ffffff;
+  box-shadow: 0 4px 8px rgba(216, 37, 106, 0.45);
+  cursor: pointer;
+  transition: transform 0.1s ease;
+}
+input[type=range].candy-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+
+/* Responsive Ad Slot Container */
+.candy-ad-slot {
+  background: rgba(255, 255, 255, 0.7);
+  border: 2px dashed #d1c4e9;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+/* Accessibility: respect prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .floating-candy {
+    display: none;
+  }
+}

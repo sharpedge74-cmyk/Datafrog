@@ -1,0 +1,19 @@
+{
+  "id": "/",
+  "name": "DataFrog Tools - 100% In-Browser Image Studio",
+  "short_name": "DataFrog",
+  "description": "50+ free, fast image tools that run 100% locally in your browser. Compress, resize, convert, edit, and enhance images with zero uploads and maximum privacy.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#fff0f5",
+  "theme_color": "#ff5b99",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "192x192 512x512",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
